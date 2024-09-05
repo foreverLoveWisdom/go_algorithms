@@ -36,15 +36,15 @@ func twoSum(nums []int, target int) []int {
 	if len(nums) < resultSize {
 		return []int{}
 	}
-	result := make([]int, resultSize)
-	for i := range nums {
-		for j := i + 1; j < len(nums); j++ {
-			if target == nums[i]+nums[j] {
-				result[0] = i
-				result[1] = j
-				break
-			}
+	resultSlice := make([]int, resultSize)
+	indexMap := make(map[int]int)
+	for i, num := range nums {
+		if val, ok := indexMap[target-num]; ok {
+			resultSlice[0] = val
+			resultSlice[1] = i
+			break
 		}
+		indexMap[num] = i
 	}
-	return result
+	return resultSlice
 }
