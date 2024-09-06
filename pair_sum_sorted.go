@@ -24,14 +24,15 @@ package main
 func pairSumSorted(nums []int, target int) []int {
 	firstPointer := 0
 	secondPointer := len(nums) - 1
+
 	for firstPointer < secondPointer {
 		sum := nums[firstPointer] + nums[secondPointer]
-		if sum == target {
+		switch {
+		case sum == target:
 			return []int{firstPointer, secondPointer}
-		}
-		if sum < target {
+		case sum < target:
 			firstPointer++
-		} else {
+		default:
 			secondPointer--
 		}
 	}
