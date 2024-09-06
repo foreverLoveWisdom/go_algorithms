@@ -22,13 +22,19 @@ package main
 // Follow-up: Can you solve this problem in O(n) time complexity?
 
 func pairSumSorted(nums []int, target int) []int {
-	indexMap := make(map[int]int)
-	for i, num := range nums {
-		complement := target - num
-		if index, ok := indexMap[complement]; ok {
-			return []int{index, i}
+	firstPointer := 0
+	secondPointer := len(nums) - 1
+	for firstPointer < secondPointer {
+		sum := nums[firstPointer] + nums[secondPointer]
+		if sum == target {
+			return []int{firstPointer, secondPointer}
 		}
-		indexMap[num] = i
+		if sum < target {
+			firstPointer++
+		} else {
+			secondPointer--
+		}
 	}
+
 	return []int{}
 }
