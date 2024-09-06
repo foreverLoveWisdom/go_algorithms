@@ -52,12 +52,12 @@ func twoSum(nums []int, target int) []int {
 	// if yes, then I will return the current index and the value of the 2nd number,
 	// if not, I will move on to the next number
 	indexMap := make(map[int]int)
-	for i, firstNum := range nums {
-		secondNum := target - firstNum
-		if _, ok := indexMap[secondNum]; ok {
-			return []int{indexMap[secondNum], i}
+	for i, num := range nums {
+		complement := target - num
+		if index, ok := indexMap[complement]; ok {
+			return []int{index, i}
 		}
-		indexMap[firstNum] = i
+		indexMap[num] = i
 	}
 	return []int{}
 }
