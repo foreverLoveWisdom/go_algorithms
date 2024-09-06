@@ -1,6 +1,7 @@
 package main
 
-// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+// Given an array of integers nums and an integer target,
+// return indices of the two numbers such that they add up to target.
 
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
@@ -32,19 +33,12 @@ package main
 // Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 
 func twoSum(nums []int, target int) []int {
-	const resultSize = 2
-	if len(nums) < resultSize {
-		return []int{}
-	}
-	resultSlice := make([]int, resultSize)
-	indexMap := make(map[int]int)
 	for i, num := range nums {
-		if val, ok := indexMap[target-num]; ok {
-			resultSlice[0] = val
-			resultSlice[1] = i
-			break
+		for j := i + 1; j < len(nums); j++ {
+			if num+nums[j] == target {
+				return []int{i, j}
+			}
 		}
-		indexMap[num] = i
 	}
-	return resultSlice
+	return []int{}
 }
