@@ -51,13 +51,13 @@ func twoSum(nums []int, target int) []int {
 	// so, I will loop through the array, starting from the first element, I check if the 2nd number is in the map
 	// if yes, then I will return the current index and the value of the 2nd number,
 	// if not, I will move on to the next number
-	hash := make(map[int]int)
+	indexMap := make(map[int]int)
 	for i, firstNum := range nums {
 		secondNum := target - firstNum
-		if _, ok := hash[secondNum]; ok {
-			return []int{hash[secondNum], i}
+		if _, ok := indexMap[secondNum]; ok {
+			return []int{indexMap[secondNum], i}
 		}
-		hash[firstNum] = i
+		indexMap[firstNum] = i
 	}
 	return []int{}
 }
