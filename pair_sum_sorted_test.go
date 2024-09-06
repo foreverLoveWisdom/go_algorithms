@@ -55,3 +55,13 @@ func TestPairSumSortedNonSolution(t *testing.T) {
 		t.Errorf("Expected %v, but got %v", want, got)
 	}
 }
+
+func TestPairSumSortedIncorrectPointerLogic(t *testing.T) {
+	nums := []int{1, 2, 3, 4, 5, 6, 7}
+	target := 6
+	want := []int{1, 3}
+	got := pairSumSorted(nums, target)
+	if !reflect.DeepEqual(want, got) {
+		t.Errorf("Expected %v, but got %v", want, got)
+	}
+}
