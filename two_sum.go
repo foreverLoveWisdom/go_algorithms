@@ -33,12 +33,31 @@ package main
 // Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 
 func twoSum(nums []int, target int) []int {
-	for i, num := range nums {
-		for j := i + 1; j < len(nums); j++ {
-			if num+nums[j] == target {
-				return []int{i, j}
-			}
+	// the end goal here is to search for the 2nd value
+	// and currently I am using a loop
+	// so, what if I can find the 2nd value without the need for the 2nd loop
+	// since this is an array problem
+	// my tool is loop, if condition here
+	// and I have the target number
+	// the 2nd value should be constructed somewhere already
+	// and its lookup time should be better than O(n)
+	// Otherwise, I will have to use a loop
+	// But 2 flat loops still better than nested loops since it is O(n)
+	// what is the data structure that has be the best lookup time:
+	// map
+	// so, I will create a map
+	// so, since the map lookup time is O(1) and I need the key, so the 2nd value should be the key of this map
+	// and the value should be the index
+	// so, I will loop through the array, starting from the first element, I check if the 2nd number is in the map
+	// if yes, then I will return the current index and the value of the 2nd number,
+	// if not, I will move on to the next number
+	hash := make(map[int]int)
+	for i, firstNum := range nums {
+		secondNum := target - firstNum
+		if _, ok := hash[secondNum]; ok {
+			return []int{hash[secondNum], i}
 		}
+		hash[firstNum] = i
 	}
 	return []int{}
 }
