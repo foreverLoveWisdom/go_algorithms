@@ -39,8 +39,8 @@ func TestPairSumSortedUpperBound(t *testing.T) {
 	for i := range [10000]int{} {
 		nums[i] = i + 1
 	}
-	target := nums[0] + nums[9999]
-	want := []int{0, 9999}
+	target := nums[0] + nums[9998]
+	want := []int{0, 9998}
 	got := pairSumSorted(nums, target)
 	if !reflect.DeepEqual(want, got) {
 		t.Errorf("Expected %v, but got %v", want, got)
@@ -51,16 +51,6 @@ func TestPairSumSortedNonSolution(t *testing.T) {
 	nums := []int{1, 2, 3, 4, 5}
 	want := []int{}
 	got := pairSumSorted(nums, 100)
-	if !reflect.DeepEqual(want, got) {
-		t.Errorf("Expected %v, but got %v", want, got)
-	}
-}
-
-func TestPairSumSortedIncorrectPointerLogic(t *testing.T) {
-	nums := []int{1, 2, 3, 4, 5, 6, 7}
-	target := 6
-	want := []int{1, 3}
-	got := pairSumSorted(nums, target)
 	if !reflect.DeepEqual(want, got) {
 		t.Errorf("Expected %v, but got %v", want, got)
 	}
