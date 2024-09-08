@@ -23,7 +23,7 @@ import (
 // - `nums[3] + nums[5] = 2 + 3 = 5`
 // Constraints: one element can be used only once.
 
-func TestPairsUnsortedArr(t *testing.T) {
+func TestPairsUnsortedArr_DuplicatedElements(t *testing.T) {
 	nums := []int{1, 3, 2, 2, 4, 3}
 	got := pairsUnsortedArr(nums, 5)
 	want := [][]int{{0, 4}, {1, 2}, {3, 5}}
