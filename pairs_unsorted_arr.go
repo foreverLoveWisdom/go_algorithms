@@ -1,21 +1,18 @@
 package main
 
-import "log"
-
 func pairsUnsortedArr(nums []int, target int) [][]int {
-	log.Println("Nums:", nums)
+	seen := make(map[int]int)  // Map to store the number and its index
+	used := make(map[int]bool) // Map to track used indices
 	result := [][]int{}
-	indexMap := map[int]int{}
 	for i, num := range nums {
-		log.Println("Current indexMap:", indexMap)
-		if _, ok := indexMap[target-num]; ok {
-			log.Println("Current num:", num)
-			log.Println("Matched pair found:", num, target-num)
-			result = append(result, []int{indexMap[target-num], i})
-			log.Println("Current result:", result)
+		complement := target - num
+		if j, found := seen[complement]; found && !used[j] {
+			// We found a complement and the complement's index hasn't been used
+			result = append(result, []int{j, i})
+			used[j] = true
+		} else {
+			seen[num] = i
 		}
-		indexMap[num] = i
 	}
-
 	return result
 }
