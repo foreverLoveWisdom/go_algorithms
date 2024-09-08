@@ -1,24 +1,21 @@
 package main
 
-func pairsUnsortedArr(nums []int, target int) [][]int {
-	result := [][]int{}
-	used := make(map[int]bool) // Map to keep track of used indices
+import "log"
 
+func pairsUnsortedArr(nums []int, target int) [][]int {
+	log.Println("Nums:", nums)
+	result := [][]int{}
+	indexMap := map[int]int{}
 	for i, num := range nums {
-		if used[i] {
-			continue
+		log.Println("Current indexMap:", indexMap)
+		if _, ok := indexMap[target-num]; ok {
+			log.Println("Current num:", num)
+			log.Println("Matched pair found:", num, target-num)
+			result = append(result, []int{indexMap[target-num], i})
+			log.Println("Current result:", result)
 		}
-		for j := i + 1; j < len(nums); j++ {
-			if used[j] {
-				continue
-			}
-			if num+nums[j] == target {
-				result = append(result, []int{i, j})
-				used[i] = true
-				used[j] = true
-				break
-			}
-		}
+		indexMap[num] = i
 	}
+
 	return result
 }
