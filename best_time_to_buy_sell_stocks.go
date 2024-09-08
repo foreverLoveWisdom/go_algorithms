@@ -25,19 +25,58 @@ package main
 //     1 <= prices.length <= 105
 //     0 <= prices[i] <= 104
 
-// Test case 1: Basic scenario with maximum profit.
-func maxProfit(prices []int) int {
-	// they give array of integers, we need to find the maximum profit
-	// the goal is to find the maximum: seems like i need to perform the minus
-	// let's go with brute force first
-	// can use nested loops
-	// what are the actions I can perform here:
-	// 1. loop through array?
-	// 2. what are the states I need?
-	// 3. what do I need to keep track?
-	// 4. what are the conditions I need to check?
+// they give array of integers, we need to find the maximum profit
+// the goal is to find the maximum: seems like i need to perform the minus
+// let's go with brute force first
+// can use nested loops
+// what are the actions I can perform here:
+// 1. loop through array?
+// 2. what are the states I need?
+// 3. what do I need to keep track?
+// 4. what are the conditions I need to check?
+// 5. Start with easiest step that lead to working solution
+// Current TC is O(n^2)
+// Current SC is O(1).
+// func maxProfit(prices []int) int {
+// 	count := len(prices)
+// 	invalidPriceLength := 2
+// 	if count < invalidPriceLength {
+// 		return 0 // Not enough prices to make a profit
+// 	}
 
-	prices
-	hardCodedValue := 5
-	return hardCodedValue
+// 	maxProfit := 0
+
+// 	log.Println("Current prices: ", prices)
+// 	for i := 0; i < count; i++ {
+// 		for j := i + 1; j < count; j++ {
+// 			// Calculate the profit from buying at index i and selling at index j
+// 			if prices[i] < prices[j] {
+// 				profit := prices[j] - prices[i]
+// 				if profit > maxProfit {
+// 					maxProfit = profit
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	return maxProfit
+// }
+
+func maxProfit(prices []int) int {
+	firstPointer := 0
+	secondPointer := len(prices) - 1
+	maxValue := 0
+	for firstPointer < secondPointer {
+		if prices[firstPointer] > prices[secondPointer] {
+			firstPointer++
+			continue
+		}
+
+		profit := prices[secondPointer] - prices[firstPointer]
+		if profit > maxValue {
+			maxValue = profit
+		}
+		secondPointer--
+	}
+	return maxValue
 }
