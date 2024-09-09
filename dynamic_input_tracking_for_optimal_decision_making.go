@@ -1,64 +1,67 @@
 package main
 
-// maximizeDelta calculates the maximum difference between elements in a sequence,
-// based on whether we are tracking a minimum or maximum value.
-func maximizeDelta(values []int, isMin bool) int {
-	if isTooShort(values) {
+const minimumLengthForComparison = 2
+
+func maximizeDelta(values []int, trackMinimum bool) int {
+	if notEnoughElementsToCompare(values) {
 		return 0
 	}
 
-	extremum := initializeExtremum(values)
-	maxDelta := 0
+	currentExtremum := firstValue(values)
+	largestDifference := 0
 
-	for i := 1; i < len(values); i++ {
-		value := values[i]
-		maxDelta = updateMaxDelta(value, extremum, maxDelta, isMin)
-		extremum = updateExtremum(value, extremum, isMin)
+	for _, currentValue := range remainingValues(values) {
+		largestDifference = updateLargestDifference(currentValue, currentExtremum, largestDifference, trackMinimum)
+		currentExtremum = updateCurrentExtremum(currentValue, currentExtremum, trackMinimum)
 	}
 
-	return maxDelta
+	return largestDifference
 }
 
-// isTooShort checks if the values slice is too short to compute a meaningful delta.
-func isTooShort(values []int) bool {
-	minValidLength := 2
-	return len(values) < minValidLength
+// notEnoughElementsToCompare checks if the values slice is too short to find any meaningful differences.
+func notEnoughElementsToCompare(values []int) bool {
+	return len(values) < minimumLengthForComparison
 }
 
-// initializeExtremum initializes the extremum with the first value in the slice.
-func initializeExtremum(values []int) int {
+// firstValue retrieves the first value in the sequence.
+func firstValue(values []int) int {
 	return values[0]
 }
 
-// updateMaxDelta calculates the delta based on whether we are tracking a min or max.
-func updateMaxDelta(value, extremum, maxDelta int, isMin bool) int {
-	delta := calculateDelta(value, extremum, isMin)
-	if delta > maxDelta {
-		return delta
-	}
-	return maxDelta
+// remainingValues retrieves all the values after the first one.
+func remainingValues(values []int) []int {
+	return values[1:]
 }
 
-// updateExtremum updates the extremum value depending on whether we are tracking min or max.
-func updateExtremum(value, extremum int, isMin bool) int {
-	if shouldUpdateExtremum(value, extremum, isMin) {
-		return value
+// updateLargestDifference compares the current difference with the largest found so far and updates it if necessary.
+func updateLargestDifference(currentValue, currentExtremum, largestDifference int, trackMinimum bool) int {
+	difference := calculateDifference(currentValue, currentExtremum, trackMinimum)
+	if difference > largestDifference {
+		return difference
 	}
-	return extremum
+	return largestDifference
 }
 
-// shouldUpdateExtremum checks whether the current value should update the extremum.
-func shouldUpdateExtremum(value, extremum int, isMin bool) bool {
-	if isMin {
-		return value < extremum
+// updateCurrentExtremum updates the current extremum (either minimum or maximum) based on the current value.
+func updateCurrentExtremum(currentValue, currentExtremum int, trackMinimum bool) int {
+	if shouldUpdateExtremum(currentValue, currentExtremum, trackMinimum) {
+		return currentValue
 	}
-	return value > extremum
+	return currentExtremum
 }
 
-// calculateDelta computes the difference (delta) based on whether we are tracking a min or max.
-func calculateDelta(value, extremum int, isMin bool) int {
-	if isMin {
-		return value - extremum
+// shouldUpdateExtremum determines if the current value should replace the current extremum.
+func shouldUpdateExtremum(currentValue, currentExtremum int, trackMinimum bool) bool {
+	if trackMinimum {
+		return currentValue < currentExtremum
 	}
-	return extremum - value
+	return currentValue > currentExtremum
+}
+
+// calculateDifference computes the difference based on whether we are tracking a minimum or maximum value.
+func calculateDifference(currentValue, currentExtremum int, trackMinimum bool) int {
+	if trackMinimum {
+		return currentValue - currentExtremum
+	}
+	return currentExtremum - currentValue
 }
