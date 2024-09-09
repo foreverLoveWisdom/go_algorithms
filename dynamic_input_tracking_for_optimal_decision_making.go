@@ -11,8 +11,14 @@ func maximizeDelta(values []int, trackMinimum bool) int {
 	largestDifference := 0
 
 	for _, currentValue := range remainingValues(values) {
-		largestDifference = updateLargestDifference(currentValue, currentExtremum, largestDifference, trackMinimum)
-		currentExtremum = updateCurrentExtremum(currentValue, currentExtremum, trackMinimum)
+		difference := calculateDifference(currentValue, currentExtremum, trackMinimum)
+		if difference > largestDifference {
+			largestDifference = difference
+		}
+
+		if shouldUpdateExtremum(currentValue, currentExtremum, trackMinimum) {
+			currentExtremum = currentValue
+		}
 	}
 
 	return largestDifference
@@ -28,37 +34,22 @@ func firstValue(values []int) int {
 	return values[0]
 }
 
-// remainingValues retrieves all the values after the first one.
+// remainingValues retrieves all the values after the first one for comparison purposes.
 func remainingValues(values []int) []int {
 	return values[1:]
 }
 
-// updateLargestDifference compares the current difference with the largest found so far and updates it if necessary.
-func updateLargestDifference(currentValue, currentExtremum, largestDifference int, trackMinimum bool) int {
-	difference := calculateDifference(currentValue, currentExtremum, trackMinimum)
-	if difference > largestDifference {
-		return difference
-	}
-	return largestDifference
-}
-
-// updateCurrentExtremum updates the current extremum (either minimum or maximum) based on the current value.
-func updateCurrentExtremum(currentValue, currentExtremum int, trackMinimum bool) int {
-	if shouldUpdateExtremum(currentValue, currentExtremum, trackMinimum) {
-		return currentValue
-	}
-	return currentExtremum
-}
-
-// shouldUpdateExtremum determines if the current value should replace the current extremum.
+// shouldUpdateExtremum checks whether the current value should replace the current extremum value.
 func shouldUpdateExtremum(currentValue, currentExtremum int, trackMinimum bool) bool {
+	// Simplified decision on whether to update based on min or max tracking
 	if trackMinimum {
 		return currentValue < currentExtremum
 	}
 	return currentValue > currentExtremum
 }
 
-// calculateDifference computes the difference based on whether we are tracking a minimum or maximum value.
+// calculateDifference computes the difference between the current value and the extremum,
+// depending on whether we are tracking the minimum or maximum.
 func calculateDifference(currentValue, currentExtremum int, trackMinimum bool) int {
 	if trackMinimum {
 		return currentValue - currentExtremum
