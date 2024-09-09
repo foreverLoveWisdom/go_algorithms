@@ -1,27 +1,32 @@
 package main
 
 func maximizeDelta(values []int, isMin bool) int {
-	if len(values) < 1 {
+	invalidValuesLength := 2
+	if len(values) < invalidValuesLength {
 		return 0
 	}
+
 	extremum := values[0]
 	maxDelta := 0
-	var delta int
-	for i := 1; i < len(values); i++ {
+
+	for _, value := range values[1:] {
+		var delta int
 		if isMin {
-			delta = values[i] - extremum
+			delta = value - extremum
+			if value < extremum {
+				extremum = value
+			}
 		} else {
-			delta = extremum - values[i]
+			delta = extremum - value
+			if value > extremum {
+				extremum = value
+			}
 		}
+
 		if delta > maxDelta {
 			maxDelta = delta
 		}
-		if isMin && values[i] < extremum {
-			extremum = values[i]
-		}
-		if !isMin && values[i] > extremum {
-			extremum = values[i]
-		}
 	}
+
 	return maxDelta
 }

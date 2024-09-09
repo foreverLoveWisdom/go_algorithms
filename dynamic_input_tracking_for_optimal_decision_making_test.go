@@ -73,3 +73,23 @@ func TestMaximizeDelta_SingleElement(t *testing.T) {
 		t.Errorf("Expected %d, but got %d", want, got)
 	}
 }
+
+func TestMaximizeDelta_NegativeValues_MaxTracking(t *testing.T) {
+	values := []int{-5, -10, -3, -20, -2}
+	want := 17
+	got := maximizeDelta(values, false)
+
+	if want != got {
+		t.Errorf("Expected %d, but got %d", want, got)
+	}
+}
+
+func TestMaximizeDelta_NegativeValues_MinTracking(t *testing.T) {
+	values := []int{-10, -5, -20, -1, -15}
+	want := 19
+	got := maximizeDelta(values, true)
+
+	if want != got {
+		t.Errorf("Expected %d, but got %d", want, got)
+	}
+}
