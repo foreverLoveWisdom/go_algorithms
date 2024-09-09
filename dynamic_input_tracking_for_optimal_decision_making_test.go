@@ -56,7 +56,7 @@ func TestMaximizeDelta_TwoElementsDecreasing(t *testing.T) {
 
 func TestMaximizeDelta_TwoElementsIncreasing(t *testing.T) {
 	values := []int{3, 10}
-	want := 7 // Delta is 10 - 3 = 7
+	want := 7
 	got := maximizeDelta(values, true)
 
 	if want != got {
@@ -66,7 +66,7 @@ func TestMaximizeDelta_TwoElementsIncreasing(t *testing.T) {
 
 func TestMaximizeDelta_SingleElement(t *testing.T) {
 	values := []int{5}
-	want := 0 // No delta can be calculated from a single element
+	want := 0
 	got := maximizeDelta(values, true)
 
 	if want != got {
