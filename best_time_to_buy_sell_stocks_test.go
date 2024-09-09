@@ -29,6 +29,18 @@ import (
 //     1 <= prices.length <= 105
 //     0 <= prices[i] <= 104
 
+// Test case 6: Edge case with very low prices and small array.
+func TestMaxProfit_LowPrices(t *testing.T) {
+	prices := []int{2, 1, 4}
+	expected := 3
+
+	result := maxProfit(prices)
+
+	if result != expected {
+		t.Errorf("Expected %d, but got %d", expected, result)
+	}
+}
+
 // Test case 1: Basic scenario with maximum profit.
 func TestMaxProfit_SimpleProfit(t *testing.T) {
 	prices := []int{7, 1, 5, 3, 6, 4}
@@ -94,18 +106,6 @@ func TestMaxProfit_LargeArray(t *testing.T) {
 
 	// The maximum profit can be achieved by buying at index 1249 and selling at index 2499
 	expected := 1249
-
-	result := maxProfit(prices)
-
-	if result != expected {
-		t.Errorf("Expected %d, but got %d", expected, result)
-	}
-}
-
-// Test case 6: Edge case with very low prices and small array.
-func TestMaxProfit_LowPrices(t *testing.T) {
-	prices := []int{0, 1, 0, 1}
-	expected := 1
 
 	result := maxProfit(prices)
 
