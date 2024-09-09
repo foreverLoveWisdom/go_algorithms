@@ -26,16 +26,15 @@ package main
 //     0 <= prices[i] <= 104
 
 func maxProfit(prices []int) int {
-	minPrice := prices[0] // Keep track of the minimum price (buy day)
-	maxProfit := 0        // Keep track of the maximum profit
+	minPrice := prices[0]
+	maxProfit := 0
 
 	for i := 1; i < len(prices); i++ {
 		currentPrice := prices[i]
 		profit := currentPrice - minPrice
 		if profit > maxProfit {
-			maxProfit = profit // Update max profit if current profit is greater
+			maxProfit = profit
 		}
-		// Update minPrice if we find a lower price (better buy day)
 		if currentPrice < minPrice {
 			minPrice = currentPrice
 		}
