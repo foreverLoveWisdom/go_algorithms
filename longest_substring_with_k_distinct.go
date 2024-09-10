@@ -68,6 +68,45 @@ package main
 // 	return maxLength
 // }
 
+// func lengthOfLongestSubstringKDistinct(s string, k int) int {
+// 	n := len(s)
+// 	if n == 0 || k == 0 {
+// 		return 0
+// 	}
+
+// 	maxLength := 0
+
+// 	// Iterate over all starting points of substrings
+// 	for i := range s {
+// 		// Use a slice to count occurrences of characters
+// 		count := make([]int, 256) // Assuming ASCII characters
+// 		distinctCount := 0
+
+// 		// Iterate over all ending points of substrings
+// 		for j := i; j < n; j++ {
+// 			char := s[j]
+// 			count[char]++
+
+// 			// If this character was not seen before, increase distinct count
+// 			if count[char] == 1 {
+// 				distinctCount++
+// 			}
+
+// 			// If we exceed k distinct characters, break out of the loop
+// 			if distinctCount > k {
+// 				break
+// 			}
+
+// 			// Update maxLength if the current substring is valid
+// 			if j-i+1 > maxLength {
+// 				maxLength = j - i + 1
+// 			}
+// 		}
+// 	}
+
+// 	return maxLength
+// }
+
 func lengthOfLongestSubstringKDistinct(s string, k int) int {
 	n := len(s)
 	if n == 0 || k == 0 {
@@ -76,19 +115,23 @@ func lengthOfLongestSubstringKDistinct(s string, k int) int {
 
 	maxLength := 0
 
-	// Iterate over all starting points of substrings
-	for i := range s {
-		// Use a slice to count occurrences of characters
-		count := make([]int, 256) // Assuming ASCII characters
+	// Outer loop to iterate over starting points of substrings
+	for i := 0; i < n; i++ {
 		distinctCount := 0
+		// Track distinct characters manually
+		isCharSeen := func(char byte, start, end int) bool {
+			for p := start; p < end; p++ {
+				if s[p] == char {
+					return true
+				}
+			}
+			return false
+		}
 
-		// Iterate over all ending points of substrings
+		// Manually keep track of distinct characters
 		for j := i; j < n; j++ {
-			char := s[j]
-			count[char]++
-
-			// If this character was not seen before, increase distinct count
-			if count[char] == 1 {
+			// Check if the current character is already in the substring s[i:j]
+			if !isCharSeen(s[j], i, j) {
 				distinctCount++
 			}
 

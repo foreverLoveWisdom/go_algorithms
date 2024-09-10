@@ -1,7 +1,5 @@
 package main
 
-import "log"
-
 // Abstraction
 // State Tracking:
 
@@ -175,7 +173,6 @@ import "log"
 // This pattern is not just about programming but also applies to decision-making, event planning, budgeting, or any other task that requires finding the best solution among many possibilities.
 func lengthOfLongestSubstring(s string) int {
 	n := len(s)
-	log.Println("Length of string: ", n)
 	if n == 0 {
 		return 0
 	}
@@ -206,7 +203,6 @@ func lengthOfLongestSubstring(s string) int {
 		// Update the maximum length found so far
 		if count > maxLength {
 			maxLength = count
-			log.Println("Update new maxLength: ", count)
 		}
 	}
 
