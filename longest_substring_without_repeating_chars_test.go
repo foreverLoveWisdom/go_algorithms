@@ -30,7 +30,7 @@ import "testing"
 //     s consists of English letters, digits, symbols and spaces.
 
 func TestLongestSubstringExample1(t *testing.T) {
-	s := "abcabcbb"
+	s := "abac"
 	want := 3
 	got := lengthOfLongestSubstring(s)
 	if got != want {
