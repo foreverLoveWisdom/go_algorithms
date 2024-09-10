@@ -177,37 +177,67 @@ func lengthOfLongestSubstring(s string) int {
 		return 0
 	}
 
-	maxLength := 0
+	start := 0                         // Start of the sliding window
+	maxLength := 0                     // Track the maximum length of the substring
+	charIndexMap := make(map[byte]int) // Map to store the last index of each character
 
-	for i := range s {
-		count := 0
-
-		for j := i; j < n; j++ {
-			// Check if s[j] exists in the substring s[i:j]
-			isDuplicate := false
-			for k := i; k < j; k++ {
-				if s[k] == s[j] {
-					isDuplicate = true
-					break
-				}
-			}
-
-			// If duplicate character is found, break the inner loop
-			if isDuplicate {
-				break
-			}
-
-			count++ // Increment the length of current valid substring
+	// Iterate through the string with 'end' pointer
+	for end := 0; end < n; end++ {
+		// If the character s[end] is already in the window (i.e., it's been seen before),
+		// and the last occurrence is inside the current window, move the 'start' pointer
+		if idx, exists := charIndexMap[s[end]]; exists && idx >= start {
+			start = idx + 1 // Move 'start' to exclude the duplicate character
 		}
 
-		// Update the maximum length found so far
-		if count > maxLength {
-			maxLength = count
+		// Update the last index of the current character
+		charIndexMap[s[end]] = end
+
+		// Calculate the length of the current valid window and update maxLength
+		if end-start+1 > maxLength {
+			maxLength = end - start + 1
 		}
 	}
 
 	return maxLength
 }
+
+// func lengthOfLongestSubstring(s string) int {
+// 	n := len(s)
+// 	if n == 0 {
+// 		return 0
+// 	}
+
+// 	maxLength := 0
+
+// 	for i := range s {
+// 		count := 0
+
+// 		for j := i; j < n; j++ {
+// 			// Check if s[j] exists in the substring s[i:j]
+// 			isDuplicate := false
+// 			for k := i; k < j; k++ {
+// 				if s[k] == s[j] {
+// 					isDuplicate = true
+// 					break
+// 				}
+// 			}
+
+// 			// If duplicate character is found, break the inner loop
+// 			if isDuplicate {
+// 				break
+// 			}
+
+// 			count++ // Increment the length of current valid substring
+// 		}
+
+// 		// Update the maximum length found so far
+// 		if count > maxLength {
+// 			maxLength = count
+// 		}
+// 	}
+
+// 	return maxLength
+// }
 
 // Key Problems to Focus On (20% Effort, 80% Results):
 
