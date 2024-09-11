@@ -172,32 +172,20 @@ package main
 
 // This pattern is not just about programming but also applies to decision-making, event planning, budgeting, or any other task that requires finding the best solution among many possibilities.
 func lengthOfLongestSubstring(s string) int {
-	n := len(s)
-	if n == 0 {
-		return 0
-	}
+	start := 0
+	hash := make(map[byte]int)
+	maxLength := 0
 
-	start := 0                         // Start of the sliding window
-	maxLength := 0                     // Track the maximum length of the substring
-	charIndexMap := make(map[byte]int) // Map to store the last index of each character
-
-	// Iterate through the string with 'end' pointer
-	for end := 0; end < n; end++ {
-		// If the character s[end] is already in the window (i.e., it's been seen before),
-		// and the last occurrence is inside the current window, move the 'start' pointer
-		if idx, exists := charIndexMap[s[end]]; exists && idx >= start {
-			start = idx + 1 // Move 'start' to exclude the duplicate character
+	for end := range s {
+		if val, ok := hash[s[end]]; ok && val >= start {
+			start = val + 1
 		}
+		hash[s[end]] = end
 
-		// Update the last index of the current character
-		charIndexMap[s[end]] = end
-
-		// Calculate the length of the current valid window and update maxLength
 		if end-start+1 > maxLength {
 			maxLength = end - start + 1
 		}
 	}
-
 	return maxLength
 }
 
