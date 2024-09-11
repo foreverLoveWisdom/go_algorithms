@@ -31,7 +31,7 @@ import "testing"
 
 func TestLongestSubstringExample0(t *testing.T) {
 	s := "abba"
-	want := 4
+	want := 2
 	got := lengthOfLongestSubstring(s)
 	if got != want {
 		t.Errorf("Test failed for input %v: expected %v, got %v", s, want, got)

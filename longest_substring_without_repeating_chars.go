@@ -213,17 +213,11 @@ func lengthOfLongestSubstring(s string) int {
 
 		// This higher-level abstraction helps us see that the `val >= start` check is not just a quirk of this specific algorithm, but a fundamental concept in maintaining the integrity of dynamic, bounded data sets. It's a pattern that can be applied in various scenarios where we need to ensure we're working with current, relevant information.
 		if val, ok := hash[s[end]]; ok && val >= start {
-			log.Println("Current char: ", string(s[end]))
-			log.Println("start BEFORE: ", start)
-			log.Println("start is gonna be: ", val, " + 1")
 			start = val + 1
-			log.Println("start AFTER: ", start)
 		}
 		hash[s[end]] = end
-		log.Println("Current hash: ", hash)
 
 		if end-start+1 > maxLength {
-			log.Println("maxLengh is gonna be re-assigned cuz of end - start + 1 > maxLengh: ", end, " - ", start, " + ", "1", " > ", maxLength)
 			maxLength = end - start + 1
 		}
 	}
