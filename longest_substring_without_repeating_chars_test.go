@@ -29,6 +29,15 @@ import "testing"
 //     0 <= s.length <= 5 * 104
 //     s consists of English letters, digits, symbols and spaces.
 
+func TestLongestSubstringExample0(t *testing.T) {
+	s := "abba"
+	want := 4
+	got := lengthOfLongestSubstring(s)
+	if got != want {
+		t.Errorf("Test failed for input %v: expected %v, got %v", s, want, got)
+	}
+}
+
 func TestLongestSubstringExample1(t *testing.T) {
 	s := "abac"
 	want := 3
