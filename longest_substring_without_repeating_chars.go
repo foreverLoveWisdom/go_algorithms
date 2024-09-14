@@ -1,7 +1,5 @@
 package main
 
-import "log"
-
 // Abstraction
 // State Tracking:
 
@@ -174,44 +172,11 @@ import "log"
 
 // This pattern is not just about programming but also applies to decision-making, event planning, budgeting, or any other task that requires finding the best solution among many possibilities.
 func lengthOfLongestSubstring(s string) int {
-	log.Println("Input: ", s)
 	start := 0
 	hash := make(map[byte]int)
 	maxLength := 0
 
 	for end := range s {
-		// I understand. I'll walk you through the process of forming a higher abstraction layer for this problem, providing my own analysis and answers. Then you can digest this information and ask any follow-up questions you may have.
-
-		// 1. Problem Description:
-		// The `val >= start` check in the longest substring without repeating characters problem ensures that we only consider characters within the current sliding window. It prevents us from incorrectly updating our window based on character occurrences that are no longer relevant.
-
-		// 2. Core Elements:
-		// The essential elements in this problem are:
-		// - The sliding window (defined by `start` and `end` pointers)
-		// - The hash map (storing the last seen position of each character)
-		// - The concept of relevance (whether a character's previous occurrence is still within our current window)
-
-		// 3. Analogies:
-		// This situation is analogous to maintaining a guest list for a venue with limited capacity:
-		// - As new guests arrive (new characters), you add them to the list.
-		// - When the venue is full and a new guest arrives, you need to remove someone.
-		// - You want to remove the person who's been there the longest, but only if they're still in the venue (still in our current window).
-
-		// 4. Abstract Representation:
-		// At a more abstract level, this check is about maintaining the integrity of a dynamic, bounded set of elements. It ensures that decisions about the set's composition are made based only on currently relevant information.
-
-		// 5. Different Levels of Abstraction:
-		// - Data Structures: This concept relates to maintaining the validity of cached or memoized data.
-		// - Algorithms: It's a form of "staleness check" in algorithms that process streaming data.
-		// - Systems Design: Similar checks are used in distributed systems to ensure operations are performed on up-to-date data.
-
-		// 6. Applying Abstracted Understanding:
-		// By understanding this as a "relevance check" or "staleness prevention mechanism", we can see why it's crucial in our original algorithm:
-		// - It prevents "stale" data (outdated character positions) from influencing our current decision-making.
-		// - It ensures the integrity of our sliding window by only considering truly relevant information.
-		// - It allows us to correctly handle cases where a character repeats after a long interval, maintaining the accuracy of our substring length calculation.
-
-		// This higher-level abstraction helps us see that the `val >= start` check is not just a quirk of this specific algorithm, but a fundamental concept in maintaining the integrity of dynamic, bounded data sets. It's a pattern that can be applied in various scenarios where we need to ensure we're working with current, relevant information.
 		if val, ok := hash[s[end]]; ok && val >= start {
 			start = val + 1
 		}
