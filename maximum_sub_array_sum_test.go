@@ -10,7 +10,8 @@ import (
 //     The length of the subarray is k, and
 //     All the elements of the subarray are distinct.
 
-// Return the maximum subarray sum of all the subarrays that meet the conditions. If no subarray meets the conditions, return 0.
+// Return the maximum subarray sum of all the subarrays that meet the conditions.
+//  If no subarray meets the conditions, return 0.
 
 // A subarray is a contiguous non-empty sequence of elements within an array.
 
@@ -181,10 +182,10 @@ func TestMaximumConstraintsWithDistinct(t *testing.T) {
 	}
 }
 
-// Helper function to generate a large array with distinct elements
+// Helper function to generate a large array with distinct elements.
 func generateLargeDistinctArray(size int) []int {
 	arr := make([]int, size)
-	for i := 0; i < size; i++ {
+	for i := range make([]struct{}, size) {
 		arr[i] = i + 1
 	}
 	return arr
