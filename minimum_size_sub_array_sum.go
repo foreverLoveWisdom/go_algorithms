@@ -36,7 +36,6 @@ func minSubArrayLen(k int, nums []int) int {
 	for right := range nums {
 		sum += nums[right]
 
-		// Shrink the window while sum is greater than or equal to k
 		for sum >= k {
 			minLength = min(minLength, right-left+1)
 			sum -= nums[left]
