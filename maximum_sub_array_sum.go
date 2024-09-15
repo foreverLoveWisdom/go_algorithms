@@ -1,7 +1,5 @@
 package main
 
-import "log"
-
 // No need for pointers for the map because maps are reference types in Go
 func shrinkWindow(window map[int]bool, nums []int, left *int, windowSum *int) {
 	delete(window, nums[*left])
@@ -16,7 +14,6 @@ func maximumSubarraySum(nums []int, k int) int64 {
 	left := 0
 
 	for right := range nums {
-		log.Println("nums[right] is: ", nums[right])
 		for window[nums[right]] {
 			shrinkWindow(window, nums, &left, &windowSum)
 		}
