@@ -43,9 +43,9 @@ import (
 // Function to be tested
 
 func TestExample1(t *testing.T) {
-	nums := []int{1, 5, 4, 2, 9, 9, 9}
+	nums := []int{1, 5, 4, 2, 8, 7, 6}
 	k := 3
-	expected := int64(15)
+	expected := int64(21)
 	result := maximumSubarraySum(nums, k)
 	if result != expected {
 		t.Errorf("TestExample1 failed: expected %d, got %d", expected, result)
