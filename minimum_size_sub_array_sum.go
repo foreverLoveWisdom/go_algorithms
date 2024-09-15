@@ -29,7 +29,6 @@ package main
 // Follow up: If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log(n)).
 
 func minSubArrayLen(k int, nums []int) int {
-	// log.Println("Nums: ", nums)
 	minLength := len(nums) + 1
 	left := 0
 	sum := 0
